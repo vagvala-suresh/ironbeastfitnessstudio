@@ -1,0 +1,123 @@
+.trainers-section {
+  padding: var(--section-padding);
+  background: #0d0f15;
+}
+
+.trainers-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.trainers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.trainer-card {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  transition: var(--transition);
+  position: relative;
+}
+
+.trainer-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-active);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.trainer-img-wrapper {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+}
+
+.trainer-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.trainer-card:hover .trainer-img {
+  transform: scale(1.06);
+}
+
+.trainer-specialty-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(10, 11, 14, 0.85);
+  backdrop-filter: blur(8px);
+  color: var(--primary-gold);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border: 1px solid var(--border-active);
+}
+
+.trainer-details {
+  padding: 24px;
+}
+
+.trainer-name {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.trainer-role {
+  color: var(--accent-lime);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.trainer-bio {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.btn-trainer-consult {
+  width: 100%;
+  background: rgba(255, 184, 0, 0.1);
+  color: var(--primary-gold);
+  border: 1px solid var(--primary-gold);
+  padding: 12px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.btn-trainer-consult:hover {
+  background: var(--primary-gold);
+  color: #000;
+}
+
+@media (max-width: 430px) {
+  .trainers-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .trainer-img-wrapper {
+    height: 260px;
+  }
+
+  .trainer-details {
+    padding: 18px;
+  }
+
+  .trainer-name {
+    font-size: 1.2rem;
+  }
+}
+

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iron Feast Fitness Studio | Premier Gym & Fitness Club</title>
+  <meta name="description" content="Iron Feast Fitness Studio - Premier athletic conditioning & personal training studio.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Modular Component CSS Files -->
+  <link rel="stylesheet" href="./src/App.css">
+  <link rel="stylesheet" href="./src/components/Header/Header.css">
+  <link rel="stylesheet" href="./src/components/Hero/Hero.css">
+  <link rel="stylesheet" href="./src/components/Features/Features.css">
+  <link rel="stylesheet" href="./src/components/Classes/Classes.css">
+  <link rel="stylesheet" href="./src/components/BMICalculator/BMICalculator.css">
+  <link rel="stylesheet" href="./src/components/Trainers/Trainers.css">
+  <link rel="stylesheet" href="./src/components/Pricing/Pricing.css">
+  <link rel="stylesheet" href="./src/components/Testimonials/Testimonials.css">
+  <link rel="stylesheet" href="./src/components/Contact/Contact.css">
+  <link rel="stylesheet" href="./src/components/Footer/Footer.css">
+
+  <!-- React 18 & Babel UMD for Standalone Execution -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // 1. Header Component
+    const Header = ({ onOpenJoinModal }) => {
+      const [scrolled, setScrolled] = useState(false);
+      const [mobileOpen, setMobileOpen] = useState(false);
+
+      useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 40);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      return (
+        <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+          <div className="container header-container">
+            <a href="#hero" className="brand-logo">
+              <div className="logo-badge">IF</div>
+              <div className="logo-text">
+                <span className="logo-title">IRON FEAST</span>
+                <span className="logo-subtitle">FITNESS STUDIO</span>
+              </div>
+            </a>
+
+            <div className={`nav-menu ${mobileOpen ? 'open' : ''}`}>
+              <ul className="nav-links">
+                <li><a href="#hero" className="nav-link" onClick={() => setMobileOpen(false)}>Home</a></li>
+                <li><a href="#features" className="nav-link" onClick={() => setMobileOpen(false)}>About</a></li>
+                <li><a href="#classes" className="nav-link" onClick={() => setMobileOpen(false)}>Classes</a></li>
+                <li><a href="#bmi" className="nav-link" onClick={() => setMobileOpen(false)}>BMI Tool</a></li>
+                <li><a href="#trainers" className="nav-link" onClick={() => setMobileOpen(false)}>Trainers</a></li>
+                <li><a href="#pricing" className="nav-link" onClick={() => setMobileOpen(false)}>Pricing</a></li>
+                <li><a href="#contact" className="nav-link" onClick={() => setMobileOpen(false)}>Contact</a></li>
+              </ul>
+            </div>
+
+            <div className="header-actions">
+              <button className="btn-header-cta" onClick={onOpenJoinModal}>JOIN NOW</button>
+              <button className="mobile-toggle" onClick={() => setMobileOpen(!mobileOpen)}>
+                {mobileOpen ? '✕' : '☰'}
+              </button>
+            </div>
+          </div>
+        </header>
+      );
+    };
+
+    // 2. Hero Component
+    const Hero = ({ onOpenJoinModal }) => (
+      <section id="hero" className="hero-section">
+        <div className="hero-bg-wrapper">
+          <img src="./assets/hero_gym.jpg" alt="Iron Feast Gym" className="hero-bg-image" />
+        </div>
+        <div className="container">
+          <div className="hero-content">
+            <div className="hero-badge">
+              <span className="badge-pulse"></span>
+              <span className="badge-text">NOW OPEN • PREMIER ATHLETIC CLUB</span>
+            </div>
+            <h1 className="hero-title">FORGE YOUR <span className="glow">LEGACY</span> IN <span className="lime">IRON</span></h1>
+            <p className="hero-description">
+              Welcome to Iron Feast Fitness Studio. Premium weightlifting equipment, high-intensity functional training, expert personal coaching, and an unstoppable community built to unlock your peak potential.
+            </p>
+            <div className="hero-buttons">
+              <button className="btn-primary" onClick={onOpenJoinModal}>CLAIM FREE 3-DAY PASS</button>
+              <a href="#classes" className="btn-secondary">EXPLORE CLASSES</a>
+            </div>
+            <div className="hero-stats">
+              <div className="stat-item"><span className="stat-number">1500<span>+</span></span><span className="stat-label">Active Members</span></div>
+              <div className="stat-item"><span className="stat-number">40<span>+</span></span><span className="stat-label">Expert Trainers</span></div>
+              <div className="stat-item"><span className="stat-number">24<span>/7</span></span><span className="stat-label">VIP Gym Access</span></div>
+              <div className="stat-item"><span className="stat-number">4.9<span>★</span></span><span className="stat-label">Member Rating</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // 3. Features Component
+    const featuresData = [
+      { icon: '⚡', title: 'Modern Equipment', desc: 'Top-of-the-line Eleiko bars, Rogue power racks, custom cable stations, and biometrically engineered cardio technology.' },
+      { icon: '🔥', title: 'Custom Programming', desc: 'Scientifically crafted workout and hypertrophy plans tailored specifically to your body type, goals, and experience level.' },
+      { icon: '🏆', title: 'Elite Coaches', desc: 'Certified master trainers dedicated to perfecting your form, keeping you motivated, and breaking your personal records.' },
+      { icon: '🥗', title: 'Macro Nutrition', desc: 'Comprehensive meal plans, body scan analysis, and tailored nutritional coaching to accelerate fat loss and muscle gain.' },
+      { icon: '🔒', title: '24/7 Keycard Access', desc: 'Train on your schedule. Keycard biometric entry lets active VIP members access the studio around the clock.' },
+      { icon: '💧', title: 'Recovery Lounge', desc: 'Infrared saunas, cold plunge tubs, and sports massage therapy rooms to maximize muscle repair and recovery.' }
+    ];
+
+    const Features = () => (
+      <section id="features" className="features-section">
+        <div className="container">
+          <div className="features-header">
+            <div className="section-title-badge">WHY IRON FEAST</div>
+            <h2 className="section-title">BUILT FOR THOSE WHO <span>DEMAND MORE</span></h2>
+            <p className="section-subtitle">Every square foot of Iron Feast Fitness Studio is designed to deliver maximum results in minimum time.</p>
+          </div>
+          <div className="features-grid">
+            {featuresData.map((item, i) => (
+              <div key={i} className="feature-card">
+                <div className="feature-icon-box">{item.icon}</div>
+                <h3 className="feature-card-title">{item.title}</h3>
+                <p className="feature-card-desc">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+
+    // 4. Classes Component
+    const classesData = [
+      { id: 1, category: 'hiit', title: 'Iron HIIT Surge', duration: '45 MINS', calories: '650 CAL', intensity: 'HIGH INTENSITY', desc: 'Heart-pounding interval training blending battle ropes, kettlebell swings, and plyometrics.', trainer: 'Coach Sarah', image: './assets/class_hiit.jpg' },
+      { id: 2, category: 'strength', title: 'Hypertrophy Powerlifting', duration: '60 MINS', calories: '500 CAL', intensity: 'HEAVY WEIGHT', desc: 'Barbell deadlifts, squats, bench press, and structural accessory lifts focused on raw muscular strength.', trainer: 'Coach Marcus', image: './assets/hero_gym.jpg' },
+      { id: 3, category: 'crossfit', title: 'Functional Cross Athletic', duration: '50 MINS', calories: '700 CAL', intensity: 'EXTREME', desc: 'Functional body movements, rowing ergometers, sled pushes, and box jumps engineered for total body conditioning.', trainer: 'Coach Sarah', image: './assets/class_hiit.jpg' },
+      { id: 4, category: 'yoga', title: 'Power Mobility & Yoga', duration: '60 MINS', calories: '300 CAL', intensity: 'MODERATE', desc: 'Deep dynamic stretching, hip/shoulder decompression, core stability, and targeted athletic recovery.', trainer: 'Coach Marcus', image: './assets/trainer_2.jpg' }
+    ];
+
+    const Classes = ({ onOpenBookModal }) => {
+      const [activeTab, setActiveTab] = useState('all');
+      const filtered = activeTab === 'all' ? classesData : classesData.filter(c => c.category === activeTab);
+
+      return (
+        <section id="classes" className="classes-section">
+          <div className="container">
+            <div className="classes-header">
+              <div className="section-title-badge">SCHEDULE & CLASSES</div>
+              <h2 className="section-title">DOMINATE YOUR <span>WORKOUTS</span></h2>
+              <p className="section-subtitle">Choose from a wide spectrum of high-energy studio classes led by certified master trainers.</p>
+            </div>
+            <div className="filter-bar">
+              {['all', 'hiit', 'strength', 'crossfit', 'yoga'].map(tab => (
+                <button key={tab} className={`filter-btn ${activeTab === tab ? 'active' : ''}`} onClick={() => setActiveTab(tab)}>
+                  {tab === 'all' ? 'All Classes' : tab.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            <div className="classes-grid">
+              {filtered.map(cls => (
+                <div key={cls.id} className="class-card">
+                  <div className="class-img-box">
+                    <img src={cls.image} alt={cls.title} className="class-img" />
+                    <span className="class-intensity-tag">{cls.intensity}</span>
+                  </div>
+                  <div className="class-body">
+                    <div className="class-meta">
+                      <span>⏱️ {cls.duration}</span>
+                      <span>🔥 {cls.calories}</span>
+                    </div>
+                    <h3 className="class-title">{cls.title}</h3>
+                    <p className="class-desc">{cls.desc}</p>
+                    <div className="class-footer">
+                      <span className="trainer-name">By {cls.trainer}</span>
+                      <button className="btn-book-class" onClick={() => onOpenBookModal(cls.title)}>Reserve Seat</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // 5. BMICalculator Component
+    const BMICalculator = () => {
+      const [height, setHeight] = useState('175');
+      const [weight, setWeight] = useState('72');
+      const [bmi, setBmi] = useState(null);
+      const [status, setStatus] = useState('');
+
+      const calc = (e) => {
+        e.preventDefault();
+        const h = parseFloat(height) / 100;
+        const w = parseFloat(weight);
+        if (h > 0 && w > 0) {
+          const val = (w / (h * h)).toFixed(1);
+          setBmi(val);
+          if (val < 18.5) setStatus('Underweight (Focus on Lean Mass Gain)');
+          else if (val < 25) setStatus('Optimal Fit Range (Maintain & Build)');
+          else if (val < 30) setStatus('Overweight (Ideal for Iron Fat Loss Plan)');
+          else setStatus('Obese (High Priority Transformation Needed)');
+        }
+      };
+
+      return (
+        <section id="bmi" className="bmi-section">
+          <div className="container">
+            <div className="bmi-container">
+              <div className="bmi-info">
+                <div className="section-title-badge">FITNESS EVALUATION</div>
+                <h2>CALCULATE YOUR <span>BMI INDEX</span></h2>
+                <p>Body Mass Index (BMI) is a starting indicator of healthy weight relative to your height.</p>
+                <table className="bmi-table">
+                  <thead><tr><th>BMI Range</th><th>Classification</th><th>Fitness Recommendation</th></tr></thead>
+                  <tbody>
+                    <tr><td>Below 18.5</td><td>Underweight</td><td>Hypertrophy Strength Program</td></tr>
+                    <tr><td>18.5 – 24.9</td><td>Normal Weight</td><td>Body Recomposition & Power</td></tr>
+                    <tr><td>25.0 – 29.9</td><td>Overweight</td><td>HIIT Fat Burn Surge</td></tr>
+                    <tr><td>30.0 +</td><td>Obese</td><td>Personalized VIP Coaching</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <form className="bmi-form" onSubmit={calc}>
+                <div className="input-row">
+                  <div className="input-group">
+                    <label>HEIGHT (CM)</label>
+                    <input type="number" className="bmi-input" value={height} onChange={e => setHeight(e.target.value)} required />
+                  </div>
+                  <div className="input-group">
+                    <label>WEIGHT (KG)</label>
+                    <input type="number" className="bmi-input" value={weight} onChange={e => setWeight(e.target.value)} required />
+                  </div>
+                </div>
+                <button type="submit" className="btn-calc-bmi">CALCULATE BMI NOW</button>
+                {bmi && (
+                  <div className="bmi-result-box">
+                    <div className="bmi-number">{bmi}</div>
+                    <div className="bmi-status">{status}</div>
+                  </div>
+                )}
+              </form>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // 6. Trainers Component
+    const trainersData = [
+      { id: 1, name: 'Marcus Vance', role: 'HEAD STRENGTH & HYPERTROPHY COACH', specialty: 'Powerlifting & Bodybuilding', bio: '10+ years experience training competitive athletes and body transformation clients.', image: './assets/trainer_1.jpg' },
+      { id: 2, name: 'Sarah Jenkins', role: 'HIIT & FUNCTIONAL ATHLETICS', specialty: 'Fat Loss & Athletic Conditioning', bio: 'Former collegiate sprinter certified in functional movement systems and metabolic conditioning.', image: './assets/trainer_2.jpg' },
+      { id: 3, name: 'Alex Rivera', role: 'NUTRITION & BODY RECOMP SPEC', specialty: 'Macro Coaching & Posture', bio: 'Specializes in tailored macro nutrition plans paired with progressive overload strength routines.', image: './assets/trainer_1.jpg' }
+    ];
+
+    const Trainers = ({ onOpenBookModal }) => (
+      <section id="trainers" className="trainers-section">
+        <div className="container">
+          <div className="trainers-header">
+            <div className="section-title-badge">MASTER COACHES</div>
+            <h2 className="section-title">GUIDED BY THE <span>BEST IN THE INDUSTRY</span></h2>
+            <p className="section-subtitle">Our certified master coaches are committed to guiding and pushing you beyond your boundaries.</p>
+          </div>
+          <div className="trainers-grid">
+            {trainersData.map(t => (
+              <div key={t.id} className="trainer-card">
+                <div className="trainer-img-wrapper">
+                  <img src={t.image} alt={t.name} className="trainer-img" />
+                  <span className="trainer-specialty-badge">{t.specialty}</span>
+                </div>
+                <div className="trainer-details">
+                  <h3 className="trainer-name">{t.name}</h3>
+                  <div className="trainer-role">{t.role}</div>
+                  <p className="trainer-bio">{t.bio}</p>
+                  <button className="btn-trainer-consult" onClick={() => onOpenBookModal(`Private Session with ${t.name}`)}>BOOK 1-ON-1 SESSION</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+
+    // 7. Pricing Component
+    const Pricing = ({ onOpenJoinModal }) => {
+      const [annual, setAnnual] = useState(true);
+      return (
+        <section id="pricing" className="pricing-section">
+          <div className="container">
+            <div className="pricing-header">
+              <div className="section-title-badge">MEMBERSHIP PLANS</div>
+              <h2 className="section-title">INVEST IN YOUR <span>PHYSICAL LEGACY</span></h2>
+              <p className="section-subtitle">Transparent pricing with zero hidden fees. Choose a plan that matches your commitment level.</p>
+            </div>
+            <div className="billing-toggle-container">
+              <span className={`billing-label ${!annual ? 'active' : ''}`}>Monthly</span>
+              <button className="filter-btn active" onClick={() => setAnnual(!annual)}>
+                {annual ? 'Annual (Save 20%)' : 'Switch to Annual'}
+              </button>
+              <span className={`billing-label ${annual ? 'active' : ''}`}>Annual <span className="save-badge">20% OFF</span></span>
+            </div>
+            <div className="pricing-grid">
+              <div className="price-card">
+                <h3 className="plan-name">Day Pass</h3>
+                <p className="plan-desc">Perfect for visitors or single workout sessions.</p>
+                <div className="plan-price-box"><span className="price-currency">$</span><span className="price-amount">25</span><span className="price-period">/ day</span></div>
+                <div className="plan-features">
+                  <div className="feature-item check"><span className="check-icon">✓</span> Full Gym Access</div>
+                  <div className="feature-item check"><span className="check-icon">✓</span> Locker & Shower Access</div>
+                  <div className="feature-item check"><span className="check-icon">✓</span> Free High-Speed Wi-Fi</div>
+                </div>
+                <button className="btn-select-plan" onClick={() => onOpenJoinModal('Day Pass')}>GET DAY PASS</button>
+              </div>
+
+              <div className="price-card popular">
+                <div className="popular-badge">MOST POPULAR</div>
+                <h3 className="plan-name">Iron Monthly</h3>
+                <p className="plan-desc">For committed athletes seeking regular studio access and classes.</p>
+                <div className="plan-price-box"><span className="price-currency">$</span><span className="price-amount">{annual ? '69' : '85'}</span><span className="price-period">/ mo</span></div>
+                <div className="plan-features">
+                  <div className="feature-item check"><span className="check-icon">✓</span> Unlimited Gym Access</div>
+                  <div className="feature-item check"><span className="check-icon">✓</span> All Group Fitness Classes</div>
+                  <div className="feature-item check"><span className="check-icon">✓</span> 24/7 Biometric Keycard</div>
+                  <div className="feature-item check"><span className="check-icon">✓</span> Monthly InBody Scan</div>
+                </div>
+                <button className="btn-select-plan" onClick={() => onOpenJoinModal('Iron Monthly')}>JOIN IRON MONTHLY</button>
+              </div>
+
+              <div className="price-card">
+                <h3 className="plan-name">Feast VIP Elite</h3>
+                <p className="plan-desc">The ultimate package including private personal training & nutrition.</p>
+                <div className="plan-price-box"><span className="price-currency">$</span><span className="price-amount">{annual ? '149' : '179'}</span><span className="price-period">/ mo</span></div>
+                <div className="plan-features">
+                  <div className="feature-item check"><span className="check-icon">✓</span> Everything in Iron Monthly</div>
+                  <div className="feature-item check"><span className="check-icon">✓</span> 4x 1-on-1 Personal Training / Mo</div>
+                  <div className="feature-item check"><span className="check-icon">✓</span> Custom Macro Nutrition Plan</div>
+                  <div className="feature-item check"><span className="check-icon">✓</span> Infrared Sauna & Cold Plunge</div>
+                </div>
+                <button className="btn-select-plan" onClick={() => onOpenJoinModal('Feast VIP Elite')}>GET VIP ACCESS</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // 8. Testimonials Component
+    const Testimonials = () => (
+      <section className="testimonials-section">
+        <div className="container">
+          <div className="testimonials-header">
+            <div className="section-title-badge">SUCCESS STORIES</div>
+            <h2 className="section-title">REAL MEMBERS. <span>REAL RESULTS.</span></h2>
+          </div>
+          <div className="testimonials-grid">
+            <div className="testimonial-card">
+              <div className="stars">★★★★★</div>
+              <p className="quote-text">"Iron Feast transformed my entire mindset toward training. The coaches actually care about your form and progress."</p>
+              <div className="author-info"><div className="author-avatar">DK</div><div className="author-details"><span className="author-name">David K.</span><span className="author-meta">Lost 28 lbs in 4 Months</span></div></div>
+            </div>
+            <div className="testimonial-card">
+              <div className="stars">★★★★★</div>
+              <p className="quote-text">"The equipment quality here is unmatched anywhere in the city. The community energy keeps me motivated every single day."</p>
+              <div className="author-info"><div className="author-avatar">ER</div><div className="author-details"><span className="author-name">Elena R.</span><span className="author-meta">Iron Monthly Member</span></div></div>
+            </div>
+            <div className="testimonial-card">
+              <div className="stars">★★★★★</div>
+              <p className="quote-text">"Having 24/7 keycard access and personal coaching sessions pushed my squat and deadlift PRs to levels I never thought possible."</p>
+              <div className="author-info"><div className="author-avatar">JT</div><div className="author-details"><span className="author-name">James T.</span><span className="author-meta">Feast VIP Client</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // 9. Contact Component
+    const Contact = () => {
+      const [sub, setSub] = useState(false);
+      return (
+        <section id="contact" className="contact-section">
+          <div className="container">
+            <div className="contact-container">
+              <div className="contact-info-box">
+                <div className="section-title-badge">VISIT & CONTACT</div>
+                <h2 className="section-title">READY TO START YOUR <span>EVOLUTION?</span></h2>
+                <div className="contact-cards-grid">
+                  <div className="info-card"><div className="info-icon">📍</div><h4 className="info-title">STUDIO LOCATION</h4><p className="info-detail">104 Iron Works Blvd, Suite 200<br/>Fitness District, NY 10001</p></div>
+                  <div className="info-card"><div className="info-icon">📞</div><h4 className="info-title">PHONE & WHATSAPP</h4><p className="info-detail">+1 (555) 890-FEAST<br/>+1 (555) 789-IRON</p></div>
+                  <div className="info-card"><div className="info-icon">⏰</div><h4 className="info-title">WORKING HOURS</h4><p className="info-detail">Mon - Fri: 5:00 AM - 11:00 PM<br/>VIP Keycard: 24 Hours / 7 Days</p></div>
+                  <div className="info-card"><div className="info-icon">✉️</div><h4 className="info-title">EMAIL INQUIRIES</h4><p className="info-detail">join@ironfeaststudio.com</p></div>
+                </div>
+              </div>
+
+              <form className="contact-form" onSubmit={(e) => { e.preventDefault(); setSub(true); setTimeout(() => setSub(false), 4000); }}>
+                <h3 className="form-title">BOOK YOUR FREE SESSION</h3>
+                {sub && <div className="form-success-msg">✓ Request received! Our team will contact you shortly.</div>}
+                <div className="input-group"><label>FULL NAME</label><input type="text" className="form-input" placeholder="John Doe" required /></div>
+                <div className="input-group"><label>EMAIL ADDRESS</label><input type="email" className="form-input" placeholder="john@example.com" required /></div>
+                <div className="input-group"><label>MESSAGE</label><textarea className="form-textarea" placeholder="Tell us your goals..."></textarea></div>
+                <button type="submit" className="btn-submit-form">CLAIM MY FREE TRIAL NOW</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // 10. Footer Component
+    const Footer = () => (
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-grid">
+            <div>
+              <a href="#hero" className="brand-logo">
+                <div className="logo-badge">IF</div>
+                <div className="logo-text"><span className="logo-title">IRON FEAST</span><span className="logo-subtitle">FITNESS STUDIO</span></div>
+              </a>
+              <p className="footer-brand-desc">Premier athletic conditioning and personal training facility dedicated to building elite physical resilience.</p>
+            </div>
+            <div>
+              <h4 className="footer-heading">QUICK LINKS</h4>
+              <div className="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#features">About Studio</a>
+                <a href="#classes">Classes</a>
+                <a href="#pricing">Pricing</a>
+              </div>
+            </div>
+            <div>
+              <h4 className="footer-heading">PROGRAMS</h4>
+              <div className="footer-links">
+                <a href="#classes">Hypertrophy</a>
+                <a href="#classes">HIIT Surge</a>
+                <a href="#bmi">BMI Tool</a>
+              </div>
+            </div>
+            <div>
+              <h4 className="footer-heading">NEWSLETTER</h4>
+              <p className="footer-brand-desc">Subscribe for fitness tips & exclusive deals.</p>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <div>© {new Date().getFullYear()} Iron Feast Fitness Studio. All Rights Reserved.</div>
+            <div>React JS & Separate Component CSS Files.</div>
+          </div>
+        </div>
+      </footer>
+    );
+
+    // Root App Component
+    const App = () => {
+      const [modal, setModal] = useState(false);
+      const [title, setTitle] = useState('JOIN IRON FEAST TODAY');
+      const [done, setDone] = useState(false);
+
+      const openModal = (t) => {
+        setTitle(typeof t === 'string' ? t : 'JOIN IRON FEAST TODAY');
+        setDone(false);
+        setModal(true);
+      };
+
+      return (
+        <div className="app">
+          <Header onOpenJoinModal={openModal} />
+          <main>
+            <Hero onOpenJoinModal={openModal} />
+            <Features />
+            <Classes onOpenBookModal={openModal} />
+            <BMICalculator />
+            <Trainers onOpenBookModal={openModal} />
+            <Pricing onOpenJoinModal={openModal} />
+            <Testimonials />
+            <Contact />
+          </main>
+          <Footer />
+
+          {modal && (
+            <div className="modal-backdrop" onClick={() => setModal(false)}>
+              <div className="modal-content" onClick={e => e.stopPropagation()}>
+                <button className="modal-close" onClick={() => setModal(false)}>✕</button>
+                <h3 className="modal-title">{title}</h3>
+                {done ? (
+                  <div className="form-success-msg">✓ Reservation confirmed! Our team will reach out to you within 24 hours.</div>
+                ) : (
+                  <form className="modal-form" onSubmit={(e) => { e.preventDefault(); setDone(true); setTimeout(() => setModal(false), 3000); }}>
+                    <div className="input-group"><label>FULL NAME</label><input type="text" className="bmi-input" required /></div>
+                    <div className="input-group"><label>EMAIL ADDRESS</label><input type="email" className="bmi-input" required /></div>
+                    <button type="submit" className="btn-calc-bmi">CONFIRM RESERVATION</button>
+                  </form>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

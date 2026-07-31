@@ -16,8 +16,12 @@ const Header = ({ onOpenJoinModal }) => {
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="container header-container">
-        <a href="#top" className="brand-logo">
-          <div className="logo-badge">IB</div>
+        <a href="#top" className="brand-logo" aria-label="Sandy's Iron Beast Fitness Studio home">
+          <img
+            src="/assets/logo-CxuevWul.png"
+            alt="Sandy's Iron Beast Fitness Studio logo"
+            className="brand-logo-image"
+          />
           <div className="logo-text">
             <span className="logo-title">Sandy's</span>
             <span className="logo-subtitle">Iron Beast Fitness Studio</span>

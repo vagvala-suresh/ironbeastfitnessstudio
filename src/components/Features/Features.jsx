@@ -1,61 +1,73 @@
 import React from 'react';
 import './Features.css';
 
-const featuresData = [
-  {
-    icon: '⚡',
-    title: 'Modern Equipment',
-    desc: 'Top-of-the-line Eleiko bars, Rogue power racks, custom cable stations, and biometrically engineered cardio technology.'
-  },
-  {
-    icon: '🔥',
-    title: 'Custom Programming',
-    desc: 'Scientifically crafted workout and hypertrophy plans tailored specifically to your body type, goals, and experience level.'
-  },
-  {
-    icon: '🏆',
-    title: 'Elite Coaches',
-    desc: 'Certified master trainers dedicated to perfecting your form, keeping you motivated, and breaking your personal records.'
-  },
-  {
-    icon: '🥗',
-    title: 'Macro Nutrition',
-    desc: 'Comprehensive meal plans, body scan analysis, and tailored nutritional coaching to accelerate fat loss and muscle gain.'
-  },
-  {
-    icon: '🔒',
-    title: '24/7 Keycard Access',
-    desc: 'Train on your schedule. Keycard biometric entry lets active VIP members access the studio around the clock.'
-  },
-  {
-    icon: '💧',
-    title: 'Recovery Lounge',
-    desc: 'Infrared saunas, cold plunge tubs, and sports massage therapy rooms to maximize muscle repair and recovery.'
-  }
-];
-
 const Features = () => {
   return (
-    <section id="features" className="features-section">
-      <div className="container">
-        <div className="features-header">
-          <div className="section-title-badge">WHY IRON FEAST</div>
-          <h2 className="section-title">
-            BUILT FOR THOSE WHO <span>DEMAND MORE</span>
-          </h2>
-          <p className="section-subtitle">
-            Every square foot of Iron Feast Fitness Studio is designed to deliver maximum results in minimum time.
-          </p>
+    <section id="about" className="features-section">
+      <div className="container features-content">
+        <div className="features-media">
+          <div className="image-card">
+            <img
+              src="/assets/sandy-trainer-CcULxw0u.jpg"
+              alt="Sandy — Head Trainer & Founder of Iron Beast Fitness Studio"
+              className="about-image"
+            />
+            <div className="image-accent" />
+          </div>
         </div>
 
-        <div className="features-grid">
-          {featuresData.map((item, index) => (
-            <div key={index} className="feature-card">
-              <div className="feature-icon-box">{item.icon}</div>
-              <h3 className="feature-card-title">{item.title}</h3>
-              <p className="feature-card-desc">{item.desc}</p>
+        <div className="features-copy">
+          <div className="features-header">
+            <div className="section-title-badge">ABOUT US</div>
+            <h2 className="section-title">
+              WHERE <span>BEASTS ARE BUILT.</span>
+            </h2>
+            <p className="section-subtitle">
+              Sandy's Iron Beast Fitness Studio is Bachupally's #1 premium fitness destination for physical transformation and athletic excellence.
+            </p>
+          </div>
+
+          <div className="about-copy-grid">
+            <div className="about-card">
+              <p>
+                Founded on the conviction that fitness is not merely a routine but a complete lifestyle revolution, we deliver a state-of-the-art training sanctuary equipped with world-class biomechanical machinery maintained to the highest professional standards.
+              </p>
             </div>
-          ))}
+            <div className="about-card">
+              <p>
+                With over 20 years of elite coaching experience, our head trainer Sandy has personally guided 2,500+ members through extraordinary transformations. We engineer customized training blueprints and precision nutrition strategies that are calibrated to your unique body composition, metabolism, and performance goals — not generic cookie-cutter plans.
+              </p>
+            </div>
+            <div className="about-card">
+              <p>
+                From aggressive fat-loss protocols and hypertrophy-driven muscle building to posture correction and cardio conditioning — every program is crafted with surgical precision. At Iron Beast, we don't just build bodies. We forge unbreakable champions.
+              </p>
+            </div>
+            <div className="about-card">
+              <p>
+                Our community is built on accountability, discipline, and relentless ambition. Whether you are taking your very first step toward fitness or chasing a new personal record, Iron Beast gives you the tools, expertise, and unstoppable energy to become the strongest version of yourself — every single day.
+              </p>
+            </div>
+          </div>
+
+          <div className="about-stats-row">
+            <div className="feature-card stat-card">
+              <h3>2,500+</h3>
+              <p>Members Trained</p>
+            </div>
+            <div className="feature-card stat-card">
+              <h3>20+</h3>
+              <p>Years Experience</p>
+            </div>
+            <div className="feature-card stat-card">
+              <h3>500+</h3>
+              <p>Success Stories</p>
+            </div>
+            <div className="feature-card stat-card">
+              <h3>13+</h3>
+              <p>Fitness Programs</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

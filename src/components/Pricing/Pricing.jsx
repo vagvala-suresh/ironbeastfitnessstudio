@@ -5,20 +5,20 @@ const Pricing = ({ onOpenJoinModal }) => {
   const [isAnnual, setIsAnnual] = useState(true);
 
   return (
-    <section id="pricing" className="pricing-section">
+    <section id="plans" className="pricing-section">
       <div className="container">
         <div className="pricing-header">
           <div className="section-title-badge">MEMBERSHIP PLANS</div>
           <h2 className="section-title">
-            INVEST IN YOUR <span>PHYSICAL LEGACY</span>
+            UNLEASH THE <span>BEAST WITHIN</span>
           </h2>
           <p className="section-subtitle">
-            Transparent pricing with zero hidden fees. Choose a plan that matches your commitment level.
+            Simple, transparent pricing. No hidden fees. Cancel anytime. All plans include full gym access.
           </p>
         </div>
 
         <div className="billing-toggle-container">
-          <span className={`billing-label ${!isAnnual ? 'active' : ''}`}>Monthly Billing</span>
+          <span className={`billing-label ${!isAnnual ? 'active' : ''}`}>Monthly</span>
           <button 
             className="filter-btn active"
             onClick={() => setIsAnnual(!isAnnual)}
@@ -27,72 +27,97 @@ const Pricing = ({ onOpenJoinModal }) => {
             {isAnnual ? 'Annual (Save 20%)' : 'Switch to Annual'}
           </button>
           <span className={`billing-label ${isAnnual ? 'active' : ''}`}>
-            Annual Billing <span className="save-badge">20% OFF</span>
+            Annual <span className="save-badge">Save 20%</span>
           </span>
         </div>
 
         <div className="pricing-grid">
-          {/* Day Pass */}
           <div className="price-card">
-            <h3 className="plan-name">Day Pass</h3>
-            <p className="plan-desc">Perfect for visitors, travelers, or single workout sessions.</p>
+            <h3 className="plan-name">MONTHLY</h3>
+            <p className="plan-desc">CONTACT US FOR PRICING</p>
             <div className="plan-price-box">
-              <span className="price-currency">$</span>
-              <span className="price-amount">25</span>
-              <span className="price-period">/ day</span>
+              <span className="price-currency">PRICE ON REQUEST</span>
             </div>
             <div className="plan-features">
-              <div className="feature-item check"><span className="check-icon">✓</span> Full Gym & Weightroom Access</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> Locker Room & Shower Access</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> Free High-Speed Wi-Fi</div>
-              <div className="feature-item"><span className="check-icon">✕</span> Group Class Included</div>
-              <div className="feature-item"><span className="check-icon">✕</span> 24/7 Keycard Access</div>
+              <div className="feature-item">Full gym access</div>
+              <div className="feature-item">Cardio zone access</div>
+              <div className="feature-item">General training guidance</div>
+              <div className="feature-item">Dedicated Client App Access</div>
             </div>
-            <button className="btn-select-plan" onClick={() => onOpenJoinModal('Day Pass')}>
-              GET DAY PASS
+            <button className="btn-select-plan" onClick={() => onOpenJoinModal('Monthly')}>
+              JOIN NOW
             </button>
           </div>
 
-          {/* Iron Monthly */}
+          <div className="price-card">
+            <h3 className="plan-name">3 MONTHS</h3>
+            <p className="plan-desc">CONTACT US FOR PRICING</p>
+            <div className="plan-price-box">
+              <span className="price-currency">PRICE ON REQUEST</span>
+            </div>
+            <div className="plan-features">
+              <div className="feature-item">Full gym access</div>
+              <div className="feature-item">Cardio zone access</div>
+              <div className="feature-item">General training guidance</div>
+              <div className="feature-item">Dedicated Client App Access</div>
+            </div>
+            <button className="btn-select-plan" onClick={() => onOpenJoinModal('3 Months')}>
+              JOIN NOW
+            </button>
+          </div>
+
+          <div className="price-card">
+            <h3 className="plan-name">6 MONTHS</h3>
+            <p className="plan-desc">CONTACT US FOR PRICING</p>
+            <div className="plan-price-box">
+              <span className="price-currency">PRICE ON REQUEST</span>
+            </div>
+            <div className="plan-features">
+              <div className="feature-item">Full gym access</div>
+              <div className="feature-item">Cardio zone access</div>
+              <div className="feature-item">General training guidance</div>
+              <div className="feature-item">Dedicated Client App Access</div>
+            </div>
+            <button className="btn-select-plan" onClick={() => onOpenJoinModal('6 Months')}>
+              JOIN NOW
+            </button>
+          </div>
+
           <div className="price-card popular">
             <div className="popular-badge">MOST POPULAR</div>
-            <h3 className="plan-name">Iron Monthly</h3>
-            <p className="plan-desc">For committed athletes seeking regular studio access and classes.</p>
+            <h3 className="plan-name">12 MONTHS</h3>
+            <p className="plan-desc">SAVE ₹2,000 ON ANNUAL COMMITMENT</p>
             <div className="plan-price-box">
-              <span className="price-currency">$</span>
-              <span className="price-amount">{isAnnual ? '69' : '85'}</span>
-              <span className="price-period">/ mo</span>
+              <span className="price-currency">₹</span>
+              <span className="price-amount">11,999</span>
+              <span className="price-period">/ YEAR</span>
             </div>
             <div className="plan-features">
-              <div className="feature-item check"><span className="check-icon">✓</span> Unlimited Gym Access</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> All Group Fitness Classes</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> 24/7 Biometric Keycard</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> Free Monthly Body Scan (InBody)</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> Locker & Towel Service</div>
+              <div className="feature-item">Customized Diet Plan</div>
+              <div className="feature-item">Full gym access</div>
+              <div className="feature-item">Cardio zone access</div>
+              <div className="feature-item">Dedicated Client App Access</div>
             </div>
-            <button className="btn-select-plan" onClick={() => onOpenJoinModal('Iron Monthly')}>
-              JOIN IRON MONTHLY
+            <button className="btn-select-plan" onClick={() => onOpenJoinModal('12 Months')}>
+              JOIN NOW
             </button>
           </div>
 
-          {/* Feast VIP */}
           <div className="price-card">
-            <h3 className="plan-name">Feast VIP Elite</h3>
-            <p className="plan-desc">The ultimate package including private personal training & nutrition.</p>
+            <h3 className="plan-name">2 YEARS BEAST PLAN</h3>
+            <p className="plan-desc">SAVE ₹6,000 ON LONG-TERM COMMITMENT</p>
             <div className="plan-price-box">
-              <span className="price-currency">$</span>
-              <span className="price-amount">{isAnnual ? '149' : '179'}</span>
-              <span className="price-period">/ mo</span>
+              <span className="price-currency">₹</span>
+              <span className="price-amount">17,999</span>
+              <span className="price-period">/ 2 YEARS</span>
             </div>
             <div className="plan-features">
-              <div className="feature-item check"><span className="check-icon">✓</span> Everything in Iron Monthly</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> 4x 1-on-1 Personal Training / Mo</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> Custom Macro Nutrition Plan</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> Infrared Sauna & Cold Plunge</div>
-              <div className="feature-item check"><span className="check-icon">✓</span> Guest Pass (2 per Month)</div>
+              <div className="feature-item">FREE Training Shoes</div>
+              <div className="feature-item">FREE Duffle / Gym Bag</div>
+              <div className="feature-item">All benefits of annual plan</div>
             </div>
-            <button className="btn-select-plan" onClick={() => onOpenJoinModal('Feast VIP Elite')}>
-              GET VIP ACCESS
+            <button className="btn-select-plan" onClick={() => onOpenJoinModal('2 Years Beast Plan')}>
+              JOIN NOW
             </button>
           </div>
         </div>

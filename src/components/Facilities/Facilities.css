@@ -1,0 +1,130 @@
+.facilities-section {
+  padding: var(--section-padding);
+  background: #0d0f15;
+}
+
+.facilities-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.facilities-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track-wrapper {
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease;
+  width: 100%;
+}
+
+.facilities-slide {
+  min-width: 100%;
+  padding: 10px 0;
+}
+
+.facilities-slide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.facility-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  padding: 28px;
+  transition: var(--transition);
+  min-height: 220px;
+}
+
+.facility-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-active);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.facility-card h3 {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  color: var(--text-main);
+}
+
+.facility-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 17, 24, 0.9);
+  color: var(--text-main);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.carousel-control:hover {
+  background: rgba(255, 184, 0, 0.16);
+  color: var(--primary-gold);
+}
+
+.carousel-control.prev {
+  left: 10px;
+}
+
+.carousel-control.next {
+  right: 10px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--primary-gold);
+  box-shadow: 0 0 0 3px rgba(255, 184, 0, 0.16);
+}
+
+@media (max-width: 1024px) {
+  .facilities-slide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 670px) {
+  .facilities-slide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .carousel-control {
+    width: 36px;
+    height: 36px;
+  }
+}

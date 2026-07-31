@@ -1,126 +1,73 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Classes.css';
 
-const classesData = [
+const services = [
   {
-    id: 1,
-    category: 'hiit',
-    title: 'Iron HIIT Surge',
-    duration: '45 MINS',
-    calories: '650 CAL',
-    intensity: 'HIGH INTENSITY',
-    desc: 'Heart-pounding interval training blending battle ropes, kettlebell swings, and plyometrics to torch calories.',
-    trainer: 'Coach Sarah',
-    image: '/assets/class_hiit.jpg'
+    title: 'Personal Training',
+    desc: 'Accelerate your transformation with elite 1-on-1 certified coaching and customized nutrition.',
+    action: 'Meet Trainers'
   },
   {
-    id: 2,
-    category: 'strength',
-    title: 'Hypertrophy Powerlifting',
-    duration: '60 MINS',
-    calories: '500 CAL',
-    intensity: 'HEAVY WEIGHT',
-    desc: 'Barbell deadlifts, squats, bench press, and structural accessory lifts focused on raw muscular strength.',
-    trainer: 'Coach Marcus',
-    image: '/assets/hero_gym.jpg'
+    title: 'World-Class Equipment',
+    desc: 'All-new strength and conditioning machines maintained daily to keep your sessions elite.',
+    action: 'View Equipment'
   },
   {
-    id: 3,
-    category: 'crossfit',
-    title: 'Functional Cross Athletic',
-    duration: '50 MINS',
-    calories: '700 CAL',
-    intensity: 'EXTREME',
-    desc: 'Functional body movements, rowing ergometers, sled pushes, and box jumps engineered for total body conditioning.',
-    trainer: 'Coach Sarah',
-    image: '/assets/class_hiit.jpg'
+    title: 'Strength Training',
+    desc: 'Progressive overload programs that build real power, muscle, and athletic endurance.',
+    action: 'Book Session'
   },
   {
-    id: 4,
-    category: 'yoga',
-    title: 'Power Mobility & Yoga',
-    duration: '60 MINS',
-    calories: '300 CAL',
-    intensity: 'MODERATE',
-    desc: 'Deep dynamic stretching, hip/shoulder decompression, core stability, and targeted athletic recovery.',
-    trainer: 'Coach Marcus',
-    image: '/assets/trainer_2.jpg'
+    title: 'Weight Loss Programs',
+    desc: 'Science-backed fat-loss protocols with targeted training and nutrition coaching.',
+    action: 'Book Session'
+  },
+  {
+    title: 'Muscle Building',
+    desc: 'Hypertrophy-focused splits designed for measurable muscle gains and definition.',
+    action: 'Book Session'
+  },
+  {
+    title: 'Cardio Training',
+    desc: 'High-energy conditioning routines designed to burn fat and boost stamina.',
+    action: 'Book Session'
+  },
+  {
+    title: 'Abs & Core Training',
+    desc: 'Targeted stability and abdominal programs for athletic power and posture.',
+    action: 'Book Session'
+  },
+  {
+    title: 'Anytime Access',
+    desc: 'Workout on your schedule with full-hour access during our operating hours.',
+    action: 'Book Session'
   }
 ];
 
 const Classes = ({ onOpenBookModal }) => {
-  const [activeTab, setActiveTab] = useState('all');
-
-  const filteredClasses = activeTab === 'all' 
-    ? classesData 
-    : classesData.filter(item => item.category === activeTab);
-
   return (
-    <section id="classes" className="classes-section">
+    <section id="services" className="classes-section">
       <div className="container">
         <div className="classes-header">
-          <div className="section-title-badge">SCHEDULE & CLASSES</div>
+          <div className="section-title-badge">WHAT WE OFFER</div>
           <h2 className="section-title">
-            DOMINATE YOUR <span>WORKOUTS</span>
+            PROGRAMS <span>BUILT TO TRANSFORM</span>
           </h2>
           <p className="section-subtitle">
-            Choose from a wide spectrum of high-energy studio classes led by certified master trainers.
+            From beginners to bodybuilders — every program is designed by certified coaches and delivered with intensity.
           </p>
         </div>
 
-        <div className="filter-bar">
-          <button 
-            className={`filter-btn ${activeTab === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveTab('all')}
-          >
-            All Classes
-          </button>
-          <button 
-            className={`filter-btn ${activeTab === 'hiit' ? 'active' : ''}`}
-            onClick={() => setActiveTab('hiit')}
-          >
-            HIIT & Cardio
-          </button>
-          <button 
-            className={`filter-btn ${activeTab === 'strength' ? 'active' : ''}`}
-            onClick={() => setActiveTab('strength')}
-          >
-            Heavy Strength
-          </button>
-          <button 
-            className={`filter-btn ${activeTab === 'crossfit' ? 'active' : ''}`}
-            onClick={() => setActiveTab('crossfit')}
-          >
-            Functional
-          </button>
-          <button 
-            className={`filter-btn ${activeTab === 'yoga' ? 'active' : ''}`}
-            onClick={() => setActiveTab('yoga')}
-          >
-            Mobility
-          </button>
-        </div>
-
         <div className="classes-grid">
-          {filteredClasses.map(cls => (
-            <div key={cls.id} className="class-card">
-              <div className="class-img-box">
-                <img src={cls.image} alt={cls.title} className="class-img" />
-                <span className="class-intensity-tag">{cls.intensity}</span>
-              </div>
-              <div className="class-body">
-                <div className="class-meta">
-                  <span>⏱️ {cls.duration}</span>
-                  <span>🔥 {cls.calories}</span>
-                </div>
-                <h3 className="class-title">{cls.title}</h3>
-                <p className="class-desc">{cls.desc}</p>
-                <div className="class-footer">
-                  <span className="trainer-name">By {cls.trainer}</span>
-                  <button className="btn-book-class" onClick={() => onOpenBookModal(cls.title)}>
-                    Reserve Seat
-                  </button>
-                </div>
+          {services.map((service, index) => (
+            <div key={index} className="class-card">
+              <div className="class-body service-body">
+                <div className="service-icon">🔥</div>
+                <h3 className="class-title">{service.title}</h3>
+                <p className="class-desc">{service.desc}</p>
+                <button className="btn-book-class" onClick={() => onOpenBookModal(service.title)}>
+                  {service.action}
+                </button>
               </div>
             </div>
           ))}

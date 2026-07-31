@@ -37,8 +37,8 @@
 
 .classes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
 }
 
 .class-card {
@@ -47,6 +47,23 @@
   overflow: hidden;
   border: 1px solid var(--border-light);
   transition: var(--transition);
+}
+
+.service-body {
+  padding: 40px 30px;
+}
+
+.service-icon {
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 184, 0, 0.12);
+  color: var(--primary-gold);
 }
 
 .class-card:hover {
@@ -159,20 +176,16 @@
     font-size: 0.8rem;
   }
 
-  .class-img-box {
-    height: 180px;
-  }
-
-  .class-body {
-    padding: 18px;
+  .service-body {
+    padding: 28px 18px;
   }
 
   .class-title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   .class-desc {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 }
 

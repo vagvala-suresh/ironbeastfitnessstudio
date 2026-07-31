@@ -5,19 +5,23 @@ import Features from './components/Features/Features.jsx';
 import Classes from './components/Classes/Classes.jsx';
 import BMICalculator from './components/BMICalculator/BMICalculator.jsx';
 import Trainers from './components/Trainers/Trainers.jsx';
+import Gallery from './components/Gallery/Gallery.jsx';
+import Transformations from './components/Transformations/Transformations.jsx';
+import Facilities from './components/Facilities/Facilities.jsx';
 import Pricing from './components/Pricing/Pricing.jsx';
 import Testimonials from './components/Testimonials/Testimonials.jsx';
+import FAQ from './components/FAQ/FAQ.jsx';
 import Contact from './components/Contact/Contact.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import './App.css';
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState('JOIN IRON FEAST TODAY');
+  const [modalTitle, setModalTitle] = useState('BOOK YOUR FREE TRIAL');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleOpenJoin = (title = 'JOIN IRON FEAST TODAY') => {
-    setModalTitle(typeof title === 'string' ? title : 'JOIN IRON FEAST TODAY');
+  const handleOpenJoin = (title = 'BOOK YOUR FREE TRIAL') => {
+    setModalTitle(typeof title === 'string' ? title : 'BOOK YOUR FREE TRIAL');
     setSubmitted(false);
     setModalOpen(true);
   };
@@ -44,9 +48,13 @@ function App() {
         <Features />
         <Classes onOpenBookModal={handleOpenJoin} />
         <BMICalculator />
-        <Trainers onOpenBookModal={handleOpenJoin} />
         <Pricing onOpenJoinModal={handleOpenJoin} />
+        <Facilities />
+        <Trainers onOpenBookModal={handleOpenJoin} />
+        <Transformations />
+        <Gallery />
         <Testimonials />
+        <FAQ />
         <Contact />
       </main>
 

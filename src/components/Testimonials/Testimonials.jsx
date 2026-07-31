@@ -1,63 +1,120 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Testimonials.css';
 
 const reviews = [
   {
     id: 1,
-    name: 'David K.',
-    meta: 'Lost 28 lbs in 4 Months',
-    initials: 'DK',
+    name: 'Boppana Hansini',
+    meta: '2 reviews · 6 days ago',
     stars: '★★★★★',
-    quote: '"Iron Feast transformed my entire mindset toward training. The coaches actually care about your form and progress rather than just counting reps."'
+    quote: "Best gym with excellent equipment and trainer (Sandy) has great knowledge about fitness and body building. He trains as per the body and being a female I feel safe and comfortable. Thanks to Sandy's Iron Beast."
   },
   {
     id: 2,
-    name: 'Elena R.',
-    meta: 'Iron Monthly Member',
-    initials: 'ER',
+    name: 'Priyanka Shukla',
+    meta: '2 reviews · 4 weeks ago',
     stars: '★★★★★',
-    quote: '"The equipment quality here is unmatched anywhere in the city. The community energy during morning HIIT classes keeps me motivated every single day."'
+    quote: "Excellent gym & well-maintained environment by SANDY ANNA!!! with top-notch equipment and professional training support. The trainer is very helpful."
   },
   {
     id: 3,
-    name: 'James T.',
-    meta: 'Feast VIP Client',
-    initials: 'JT',
+    name: 'Vishwanath Muta',
+    meta: 'Local Guide · 7 reviews',
     stars: '★★★★★',
-    quote: '"Having 24/7 keycard access and personal coaching sessions pushed my squat and deadlift PRs to levels I never thought possible."'
+    quote: "Spacious for strength training. Trainers are worth the money and time. Modern equipment, clean facilities, flexible timings. Completely safe and comfortable for Ladies."
+  },
+  {
+    id: 4,
+    name: 'Tejaswi Gedela',
+    meta: 'Local Guide · 72 reviews · 3 months ago',
+    stars: '★★★★★',
+    quote: "Extremely nice and peaceful gym. Great ambience, music, comfortable people, friendly supportive and talented trainers. They always keep a close eye on you and correct your form."
+  },
+  {
+    id: 5,
+    name: 'Rumi Mukherjee',
+    meta: '13 reviews · 5 months ago',
+    stars: '★★★★★',
+    quote: "I'm blown away by the top-notch facilities and expert guidance at Sandy's Iron Beast. The trainers (Sandy & Naresh) are super supportive, pushing me to reach my fitness goals while keeping it fun."
   }
 ];
 
 const Testimonials = () => {
+  const [current, setCurrent] = useState(0);
+  const slideCount = reviews.length;
+  const autoplayRef = useRef(null);
+
+  useEffect(() => {
+    startAutoplay();
+    return stopAutoplay;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current]);
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    autoplayRef.current = setInterval(() => {
+      setCurrent((c) => (c + 1) % slideCount);
+    }, 5000);
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  };
+
+  const goPrev = () => setCurrent((c) => (c - 1 + slideCount) % slideCount);
+  const goNext = () => setCurrent((c) => (c + 1) % slideCount);
+
   return (
-    <section className="testimonials-section">
+    <section id="reviews" className="testimonials-section">
       <div className="container">
         <div className="testimonials-header">
-          <div className="section-title-badge">SUCCESS STORIES</div>
-          <h2 className="section-title">
-            REAL MEMBERS. <span>REAL RESULTS.</span>
-          </h2>
-          <p className="section-subtitle">
-            Hear from dedicated athletes who achieved their personal breakthroughs at Iron Feast.
-          </p>
+          <div className="section-title-badge">RATED 5.0★ ON GOOGLE</div>
+          <h2 className="section-title">REAL PEOPLE. <span>REAL RESULTS.</span></h2>
+          <p className="section-subtitle">Real feedback from members who trained here and stayed.</p>
         </div>
 
-        <div className="testimonials-grid">
-          {reviews.map(item => (
-            <div key={item.id} className="testimonial-card">
-              <div>
-                <div className="stars">{item.stars}</div>
-                <p className="quote-text">{item.quote}</p>
-              </div>
-              <div className="author-info">
-                <div className="author-avatar">{item.initials}</div>
-                <div className="author-details">
-                  <span className="author-name">{item.name}</span>
-                  <span className="author-meta">{item.meta}</span>
+        <div
+          className="reviews-carousel"
+          onMouseEnter={stopAutoplay}
+          onMouseLeave={startAutoplay}
+        >
+          <button className="carousel-control prev" onClick={goPrev} aria-label="Previous review">‹</button>
+
+          <div className="carousel-track-wrapper">
+            <div
+              className="carousel-track"
+              style={{ transform: `translateX(-${current * 100}%)` }}
+            >
+              {reviews.map((r) => (
+                <div className="review-slide" key={r.id}>
+                  <div className="review-card">
+                    <div className="review-stars">{r.stars}</div>
+                    <p className="review-quote">{r.quote}</p>
+                    <div className="review-author">
+                      <div className="author-name">{r.name}</div>
+                      <div className="author-meta">{r.meta}</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <button className="carousel-control next" onClick={goNext} aria-label="Next review">›</button>
+
+          <div className="carousel-dots">
+            {reviews.map((_, i) => (
+              <button
+                key={i}
+                className={`dot ${i === current ? 'active' : ''}`}
+                onClick={() => setCurrent(i)}
+                aria-label={`Go to review ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -4,27 +4,27 @@ import './Trainers.css';
 const trainersData = [
   {
     id: 1,
-    name: 'Marcus Vance',
-    role: 'HEAD STRENGTH & HYPERTROPHY COACH',
-    specialty: 'Powerlifting & Bodybuilding',
-    bio: '10+ years experience training competitive athletes, powerlifters, and body transformation clients.',
-    image: '/assets/trainer_1.jpg'
+    name: 'Arjun Reddy',
+    role: 'Head Strength Coach',
+    specialty: 'Powerlifting specialist',
+    bio: 'Built championship physiques and transformed 300+ members.',
+    image: '/assets/trainer-1-DZBAPzKK.jpg'
   },
   {
     id: 2,
-    name: 'Sarah Jenkins',
-    role: 'HIIT & FUNCTIONAL ATHLETICS',
-    specialty: 'Fat Loss & Athletic Conditioning',
-    bio: 'Former collegiate sprinter certified in functional movement systems and metabolic conditioning.',
-    image: '/assets/trainer_2.jpg'
+    name: 'Priya Sharma',
+    role: "Women's Fitness Lead",
+    specialty: 'Fat-loss & Postnatal Recovery',
+    bio: 'Empowering women through strength training and safe program design.',
+    image: '/assets/trainer-2-COwOnH3d.jpg'
   },
   {
     id: 3,
-    name: 'Alex Rivera',
-    role: 'NUTRITION & BODY RECOMP SPEC',
-    specialty: 'Macro Coaching & Posture',
-    bio: 'Specializes in tailored macro nutrition plans paired with progressive overload strength routines.',
-    image: '/assets/trainer_1.jpg'
+    name: 'Rohan Iyer',
+    role: 'Bodybuilding Coach',
+    specialty: 'Competition Prep & Hypertrophy',
+    bio: 'Competition prep, hypertrophy, and nutrition — the full package.',
+    image: '/assets/trainer-3-BhxOt8gG.jpg'
   }
 ];
 
@@ -33,12 +33,12 @@ const Trainers = ({ onOpenBookModal }) => {
     <section id="trainers" className="trainers-section">
       <div className="container">
         <div className="trainers-header">
-          <div className="section-title-badge">MASTER COACHES</div>
+          <div className="section-title-badge">MEET THE TEAM</div>
           <h2 className="section-title">
-            GUIDED BY THE <span>BEST IN THE INDUSTRY</span>
+            COACHES WHO <span>PUSH YOU</span>
           </h2>
           <p className="section-subtitle">
-            Our certified master coaches are committed to guiding, encouraging, and pushing you beyond your boundaries.
+            Certified. experienced. relentless. Our trainers live and breathe fitness — and they're here to build your best version.
           </p>
         </div>
 

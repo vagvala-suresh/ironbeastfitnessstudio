@@ -1,68 +1,134 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './Transformations.css';
 
-const items = [
-  {
-    before: '/assets/ravi_before-C2EVwo4z.png',
-    after: '/assets/ravi_after-BCmUOrvI.png',
-    name: 'Bhanu Pratap',
-    note: '84 KG → 75 KG (1 MONTH)',
-    quote: 'Iron Beast changed my life. The trainers corrected my form and the 1-month results are mind-blowing.'
-  },
-  {
-    before: '/assets/vikram_before-Bul8L0nU.png',
-    after: '/assets/vikram_after-BaBzw5Pw.png',
-    name: 'Venkatesh',
-    note: 'POSTURAL CORRECTION (1 MONTH)',
-    quote: 'Correcting my posture and getting fit within a month changed my health completely. Highly support staff.'
-  },
-  {
-    before: '/assets/kiran_before-b6PzD4lC.png',
-    after: '/assets/kiran_after-DXmVppC9.png',
-    name: 'Madhu',
-    note: 'ATHLETIC BUILD (1 MONTH)',
-    quote: 'Went from a sedentary lifestyle to an active, athletic build. Highly professional trainers who focus on results.'
-  },
-  {
-    before: '/assets/prasad_before-BG0O7a8q.jpg',
-    after: '/assets/prasad_after-xXoIiO6G.jpg',
-    name: 'Prasad',
-    note: 'FAT LOSS & MUSCLE GAIN (1 MONTH)',
-    quote: 'Trained directly under Sandy’s guidance. The nutrition blueprint combined with precise workout routine gave me incredible strength and visible fat loss.'
+const normalizeKey = (key) => key.toLowerCase().replace(/(\d+)$/, '');
+
+const getTransformationMeta = (key) => {
+  const normalizedKey = normalizeKey(key);
+  const fallbackName = normalizedKey
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+  return {
+    name: fallbackName,
+    note: `${fallbackName.toUpperCase()} TRANSFORMATION`,
+    quote: ''
+  };
+};
+
+const transformationModules = Object.values(import.meta.glob('/assets/transformation/*.{png,jpg,jpeg}', { eager: true, import: 'default' }))
+  .map((url) => {
+    const match = url.match(/\/assets\/transformation\/([^/]+)$/i);
+    return match ? match[1] : '';
+  })
+  .filter(Boolean)
+  .sort();
+
+const items = transformationModules.reduce((pairs, fileName) => {
+  const lowerName = fileName.toLowerCase();
+
+  if (lowerName.includes('_before')) {
+    const key = fileName.replace(/_before.*$/i, '');
+    const existing = pairs.find((entry) => entry.key === key);
+    if (existing) {
+      existing.before = `/assets/transformation/${fileName}`;
+    } else {
+      pairs.push({ key, before: `/assets/transformation/${fileName}`, after: '' });
+    }
+  } else if (lowerName.includes('_after')) {
+    const key = fileName.replace(/_after.*$/i, '');
+    const existing = pairs.find((entry) => entry.key === key);
+    if (existing) {
+      existing.after = `/assets/transformation/${fileName}`;
+    } else {
+      pairs.push({ key, before: '', after: `/assets/transformation/${fileName}` });
+    }
   }
-];
+
+  return pairs;
+}, []);
+
+const transformedItems = items
+  .filter((item) => item.before && item.after)
+  .map((item) => {
+    const meta = getTransformationMeta(item.key);
+    const displayName = meta.name || item.key.replace(/^[a-z]/, (char) => char.toUpperCase());
+
+    return {
+      before: item.before,
+      after: item.after,
+      name: displayName,
+      note: meta.note || 'TRANSFORMATION STORY',
+      quote: meta.quote || ''
+    };
+  });
+
+const TransformationCard = ({ item }) => {
+  const [split, setSplit] = useState(50);
+  const dragStartX = useRef(null);
+  const containerRef = useRef(null);
+
+  const handleDragStart = (event) => {
+    dragStartX.current = event.clientX ?? null;
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const handleDragMove = (event) => {
+    if (dragStartX.current === null || !containerRef.current) return;
+
+    event.preventDefault();
+    const currentX = event.clientX ?? null;
+    if (currentX === null) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const relativeX = ((currentX - rect.left) / rect.width) * 100;
+    const clamped = Math.min(95, Math.max(5, relativeX));
+    setSplit(clamped);
+  };
+
+  const handleDragEnd = (event) => {
+    dragStartX.current = null;
+    event?.currentTarget?.releasePointerCapture?.(event.pointerId);
+  };
+
+  return (
+    <div className="transform-card">
+      <div className="transformation-stage">
+        <div
+          ref={containerRef}
+          className="image-panel"
+          onPointerDown={handleDragStart}
+          onPointerMove={handleDragMove}
+          onPointerUp={handleDragEnd}
+          onPointerCancel={handleDragEnd}
+        >
+          <div className="comparison-frame">
+            <img className="comparison-image before-image" src={item.before} alt={`${item.name} before`} />
+            <div className="comparison-image after-layer" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}>
+              <img className="comparison-image" src={item.after} alt={`${item.name} after`} />
+            </div>
+            <div className="comparison-divider" style={{ left: `${split}%` }}>
+              <span className="comparison-handle" />
+            </div>
+            <div className="comparison-label before-label">BEFORE</div>
+            <div className="comparison-label after-label">AFTER</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="transform-meta">
+        <div className="transform-note">{item.note}</div>
+        {item.quote ? <p className="transform-quote">"{item.quote}"</p> : null}
+      </div>
+    </div>
+  );
+};
 
 const Transformations = () => {
-  const [current, setCurrent] = useState(0);
-  const slideGroups = [];
-  for (let i = 0; i < items.length; i += 2) {
-    slideGroups.push(items.slice(i, i + 2));
-  }
-  const slideCount = slideGroups.length;
-  const autoplayRef = useRef(null);
-
-  useEffect(() => {
-    startAutoplay();
-    return stopAutoplay;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current]);
-
-  const startAutoplay = () => {
-    stopAutoplay();
-    autoplayRef.current = setInterval(() => {
-      setCurrent((c) => (c + 1) % slideCount);
-    }, 5000);
-  };
-
-  const stopAutoplay = () => {
-    if (autoplayRef.current) {
-      clearInterval(autoplayRef.current);
-      autoplayRef.current = null;
-    }
-  };
-
-  const goPrev = () => setCurrent((c) => (c - 1 + slideCount) % slideCount);
-  const goNext = () => setCurrent((c) => (c + 1) % slideCount);
+  const [paused, setPaused] = useState(false);
+  const slideItems = transformedItems;
+  const marqueeItems = [...slideItems, ...slideItems];
+  const duration = Math.max(14, slideItems.length * 1.8);
 
   return (
     <section id="transformations" className="transformations-section">
@@ -73,50 +139,29 @@ const Transformations = () => {
           <p className="section-subtitle">Every body is different. What's common is the discipline, the coaching, and the results that follow.</p>
         </div>
 
-        <div className="transform-carousel" onMouseEnter={stopAutoplay} onMouseLeave={startAutoplay}>
-          <button className="carousel-control prev" onClick={goPrev} aria-label="Previous transformation">‹</button>
-
+        <div
+          className="transform-carousel"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+        >
           <div className="carousel-track-wrapper">
-            <div className="carousel-track" style={{ transform: `translateX(-${current * 100}%)` }}>
-              {slideGroups.map((group, index) => (
-                <div className="transform-slide" key={index}>
+            <div
+              className="carousel-track"
+              style={{
+                animation: `transform-marquee ${duration}s linear infinite`,
+                animationPlayState: paused ? 'paused' : 'running'
+              }}
+            >
+              {marqueeItems.map((item, index) => (
+                <div className="transform-slide" key={`${item.name}-${index}`}>
                   <div className="transform-slide-row">
-                    {group.map((it, i) => (
-                      <div className="transform-card" key={i}>
-                        <div className="before-after">
-                          <div className="before">
-                            <img src={it.before} alt={`${it.name} before`} />
-                            <div className="label">BEFORE</div>
-                          </div>
-                          <div className="after">
-                            <img src={it.after} alt={`${it.name} after`} />
-                            <div className="label">AFTER</div>
-                          </div>
-                        </div>
-                        <div className="transform-meta">
-                          <div className="transform-note">{it.note}</div>
-                          <div className="transform-author">{it.name}</div>
-                          <p className="transform-quote">"{it.quote}"</p>
-                        </div>
-                      </div>
-                    ))}
+                    <TransformationCard item={item} />
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-
-          <button className="carousel-control next" onClick={goNext} aria-label="Next transformation">›</button>
-
-          <div className="carousel-dots">
-            {slideGroups.map((_, i) => (
-              <button
-                key={i}
-                className={`dot ${i === current ? 'active' : ''}`}
-                onClick={() => setCurrent(i)}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
           </div>
         </div>
       </div>

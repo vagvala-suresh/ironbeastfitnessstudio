@@ -49,24 +49,6 @@ const Hero = ({ onOpenJoinModal }) => {
               </div>
             </div>
 
-            <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-number">2,500<span>+</span></span>
-                <span className="stat-label">Members Trained</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">20<span>+</span></span>
-                <span className="stat-label">Years Experience</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">500<span>+</span></span>
-                <span className="stat-label">Success Stories</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">13<span>+</span></span>
-                <span className="stat-label">Fitness Programs</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>

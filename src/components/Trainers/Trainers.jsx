@@ -1,6 +1,14 @@
 import React from 'react';
 import './Trainers.css';
 
+const trainerFiles = Object.values(import.meta.glob('../../../assets/trainers/*.{png,jpg,jpeg}', { eager: true, import: 'default' }))
+  .map((url) => {
+    const match = url.match(/\/assets\/trainers\/([^/]+)$/i);
+    return match ? match[1] : '';
+  })
+  .filter(Boolean)
+  .sort();
+
 const trainersData = [
   {
     id: 1,
@@ -8,7 +16,7 @@ const trainersData = [
     role: 'Head Strength Coach',
     specialty: 'Powerlifting specialist',
     bio: 'Built championship physiques and transformed 300+ members.',
-    image: '/assets/trainer-1-DZBAPzKK.jpg'
+    image: `/assets/trainers/${trainerFiles[0] || 'trainer-1-DZBAPzKK.jpg'}`
   },
   {
     id: 2,
@@ -16,7 +24,7 @@ const trainersData = [
     role: "Women's Fitness Lead",
     specialty: 'Fat-loss & Postnatal Recovery',
     bio: 'Empowering women through strength training and safe program design.',
-    image: '/assets/trainer-2-COwOnH3d.jpg'
+    image: `/assets/trainers/${trainerFiles[1] || 'trainer-2-COwOnH3d.jpg'}`
   },
   {
     id: 3,
@@ -24,7 +32,7 @@ const trainersData = [
     role: 'Bodybuilding Coach',
     specialty: 'Competition Prep & Hypertrophy',
     bio: 'Competition prep, hypertrophy, and nutrition — the full package.',
-    image: '/assets/trainer-3-BhxOt8gG.jpg'
+    image: `/assets/trainers/${trainerFiles[2] || 'trainer-3-BhxOt8gG.jpg'}`
   }
 ];
 

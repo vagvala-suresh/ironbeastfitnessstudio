@@ -29,9 +29,6 @@ const Hero = ({ onOpenJoinModal }) => {
             </p>
 
             <div className="hero-buttons">
-              <button className="btn-primary" onClick={onOpenJoinModal}>
-                BOOK A FREE TRIAL
-              </button>
               <a href="#plans" className="btn-secondary">
                 VIEW MEMBERSHIPS
               </a>

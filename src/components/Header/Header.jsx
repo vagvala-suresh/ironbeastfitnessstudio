@@ -42,19 +42,6 @@ const Header = ({ onOpenJoinModal }) => {
             <li><a href="#contact" className="nav-link" onClick={() => setMobileOpen(false)}>Contact</a></li>
           </ul>
         </div>
-
-        <div className="header-actions">
-          <button className="btn-header-cta" onClick={onOpenJoinModal}>
-            BOOK FREE TRIAL
-          </button>
-          <button 
-            className="mobile-toggle" 
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle navigation"
-          >
-            {mobileOpen ? '✕' : '☰'}
-          </button>
-        </div>
       </div>
     </header>
   );

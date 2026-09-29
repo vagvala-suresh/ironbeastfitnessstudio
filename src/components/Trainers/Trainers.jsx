@@ -61,12 +61,6 @@ const Trainers = ({ onOpenBookModal }) => {
                 <h3 className="trainer-name">{trainer.name}</h3>
                 <div className="trainer-role">{trainer.role}</div>
                 <p className="trainer-bio">{trainer.bio}</p>
-                <button 
-                  className="btn-trainer-consult"
-                  onClick={() => onOpenBookModal(`Private Consultation with ${trainer.name}`)}
-                >
-                  BOOK 1-ON-1 SESSION
-                </button>
               </div>
             </div>
           ))}

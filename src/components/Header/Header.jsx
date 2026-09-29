@@ -18,7 +18,7 @@ const Header = ({ onOpenJoinModal }) => {
       <div className="container header-container">
         <a href="#top" className="brand-logo" aria-label="Sandy's Iron Beast Fitness Studio home">
           <img
-            src="/assets/logo-CxuevWul.png"
+            src="/ironbeastfitnessstudio/assets/logo-CxuevWul.png"
             alt="Sandy's Iron Beast Fitness Studio logo"
             className="brand-logo-image"
           />

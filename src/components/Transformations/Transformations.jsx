@@ -103,9 +103,9 @@ const TransformationCard = ({ item }) => {
           onPointerCancel={handleDragEnd}
         >
           <div className="comparison-frame">
-            <img className="comparison-image before-image" src={item.before} alt={`${item.name} before`} />
+            <img className="comparison-image before-image" src={`/ironbeastfitnessstudio${item.before}`} alt={`${item.name} before`} />
             <div className="comparison-image after-layer" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}>
-              <img className="comparison-image" src={item.after} alt={`${item.name} after`} />
+              <img className="comparison-image" src={`/ironbeastfitnessstudio${item.after}`} alt={`${item.name} after`} />
             </div>
             <div className="comparison-divider" style={{ left: `${split}%` }}>
               <span className="comparison-handle" />

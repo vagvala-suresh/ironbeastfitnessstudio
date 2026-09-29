@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import './Gallery.css';
 
-const galleryModules = Object.values(import.meta.glob('../../../assets/gallery/*.{png,jpg,jpeg}', { eager: true, import: 'default' }))
-  .map((url) => {
-    const match = url.match(/\/assets\/gallery\/([^/]+)$/i);
-    return match ? match[1] : '';
+const galleryModules = Object.entries(import.meta.glob('../../../assets/gallery/*.{png,jpg,jpeg}', { eager: true, import: 'default' }))
+  .map(([path, src]) => {
+    const match = path.match(/\/assets\/gallery\/([^/]+)$/i);
+    const fileName = match ? match[1] : '';
+
+    if (!fileName) return null;
+
+    return {
+      src,
+      label: fileName.replace(/\.(png|jpg|jpeg)$/i, '').replace(/-/g, ' ').replace(/_/g, ' ')
+    };
   })
   .filter(Boolean)
-  .sort();
+  .sort((a, b) => a.label.localeCompare(b.label));
 
-const images = galleryModules.map((fileName) => ({
-  src: `/assets/gallery/${fileName}`,
-  label: fileName.replace(/\.(png|jpg|jpeg)$/i, '').replace(/-/g, ' ').replace(/_/g, ' ')
-}));
+const images = galleryModules;
 
 const Gallery = () => {
   const [paused, setPaused] = useState(false);
@@ -46,7 +50,7 @@ const Gallery = () => {
               {marqueeItems.map((image, index) => (
                 <div className="gallery-slide" key={`${image.label}-${index}`}>
                   <div className="gallery-card">
-                    <img src={`/ironbeastfitnessstudio${image.src}`} alt={image.label} />
+                    <img src={image.src} alt={image.label} />
                     <div className="gallery-caption">{image.label}</div>
                   </div>
                 </div>

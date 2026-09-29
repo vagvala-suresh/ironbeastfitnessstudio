@@ -15,14 +15,22 @@ import Contact from './components/Contact/Contact.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import './App.css';
 
+const WHATSAPP_NUMBER = '918919457428';
+
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('BOOK YOUR FREE TRIAL');
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
 
   const handleOpenJoin = (title = 'BOOK YOUR FREE TRIAL') => {
     setModalTitle(typeof title === 'string' ? title : 'BOOK YOUR FREE TRIAL');
     setSubmitted(false);
+    setFormData({ name: '', email: '', phone: '' });
     setModalOpen(true);
   };
 
@@ -30,8 +38,31 @@ function App() {
     setModalOpen(false);
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const buildWhatsAppMessage = () => {
+    return [
+      'Hello Iron Beast Fitness Studio,',
+      '',
+      'New membership inquiry received.',
+      `Plan: ${modalTitle}`,
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Phone: ${formData.phone}`,
+      '',
+      'Please contact this customer to confirm enrollment.'
+    ].join('\n');
+  };
+
   const handleModalSubmit = (e) => {
     e.preventDefault();
+
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage())}`;
+    window.open(whatsappUrl, '_blank');
+
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -75,15 +106,39 @@ function App() {
               <form className="modal-form" onSubmit={handleModalSubmit}>
                 <div className="input-group">
                   <label>FULL NAME</label>
-                  <input type="text" className="bmi-input" placeholder="Your Name" required />
+                  <input
+                    type="text"
+                    name="name"
+                    className="bmi-input"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="input-group">
                   <label>EMAIL ADDRESS</label>
-                  <input type="email" className="bmi-input" placeholder="your@email.com" required />
+                  <input
+                    type="email"
+                    name="email"
+                    className="bmi-input"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="input-group">
                   <label>PHONE NUMBER</label>
-                  <input type="tel" className="bmi-input" placeholder="+1 (555) 000-0000" required />
+                  <input
+                    type="tel"
+                    name="phone"
+                    className="bmi-input"
+                    placeholder="+1 (555) 000-0000"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <button type="submit" className="btn-calc-bmi" style={{ marginTop: '10px' }}>
                   CONFIRM RESERVATION

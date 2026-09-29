@@ -7,7 +7,7 @@ const Hero = ({ onOpenJoinModal }) => {
       <section id="top" className="hero-section">
         <div className="hero-bg-wrapper">
           <img
-            src="/assets/hero-BSeVQnra.png"
+            src="/ironbeastfitnessstudio/assets/hero-BSeVQnra.png"
             alt="Sandy's Iron Beast Gym Hero"
             className="hero-bg-image"
           />

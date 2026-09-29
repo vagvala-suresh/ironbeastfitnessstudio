@@ -65,9 +65,6 @@ const Classes = ({ onOpenBookModal }) => {
                 <div className="service-icon">🔥</div>
                 <h3 className="class-title">{service.title}</h3>
                 <p className="class-desc">{service.desc}</p>
-                <button className="btn-book-class" onClick={() => onOpenBookModal(service.title)}>
-                  {service.action}
-                </button>
               </div>
             </div>
           ))}

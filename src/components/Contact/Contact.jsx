@@ -27,7 +27,7 @@ const Contact = () => {
                 Stop by Sandy's Iron Beast Fitness Studio for a free walkthrough, or get in touch with our team to schedule your trial.
               </p>
 
-              <div className="contact-cards-grid">
+              <div className="contact-cards-grid train-cards-grid">
                 <div className="info-card">
                   <div className="info-icon">📍</div>
                   <h4 className="info-title">STUDIO LOCATION</h4>

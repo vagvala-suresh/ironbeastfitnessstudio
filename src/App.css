@@ -251,3 +251,7 @@ button {
   gap: 16px;
 }
 
+.train-cards-grid {
+  display: flex !important;
+  width: max-content;
+}

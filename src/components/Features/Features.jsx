@@ -8,7 +8,7 @@ const Features = () => {
         <div className="features-media">
           <div className="image-card">
             <img
-              src="/assets/sandy-trainer-CcULxw0u.jpg"
+              src="/ironbeastfitnessstudio/assets/sandy-trainer-CcULxw0u.jpg"
               alt="Sandy — Head Trainer & Founder of Iron Beast Fitness Studio"
               className="about-image"
             />

@@ -54,7 +54,7 @@ const Trainers = ({ onOpenBookModal }) => {
           {trainersData.map((trainer) => (
             <div key={trainer.id} className="trainer-card">
               <div className="trainer-img-wrapper">
-                <img src={trainer.image} alt={trainer.name} className="trainer-img" />
+                <img src={`/ironbeastfitnessstudio${trainer.image}`} alt={trainer.name} className="trainer-img" />
                 <span className="trainer-specialty-badge">{trainer.specialty}</span>
               </div>
               <div className="trainer-details">

@@ -72,7 +72,7 @@ const Testimonials = () => {
       <div className="container">
         <div className="testimonials-header">
           <div className="section-title-badge">RATED 5.0★ ON GOOGLE</div>
-          <h2 className="section-title">REAL PEOPLE. <span>REAL RESULTS.</span></h2>
+          <h2 className="section-title">What Our <span>Members Say</span></h2>
           <p className="section-subtitle">Real feedback from members who trained here and stayed.</p>
         </div>
 

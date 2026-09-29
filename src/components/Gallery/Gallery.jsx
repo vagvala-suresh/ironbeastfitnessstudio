@@ -46,7 +46,7 @@ const Gallery = () => {
               {marqueeItems.map((image, index) => (
                 <div className="gallery-slide" key={`${image.label}-${index}`}>
                   <div className="gallery-card">
-                    <img src={image.src} alt={image.label} />
+                    <img src={`/ironbeastfitnessstudio${image.src}`} alt={image.label} />
                     <div className="gallery-caption">{image.label}</div>
                   </div>
                 </div>

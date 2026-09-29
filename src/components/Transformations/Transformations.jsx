@@ -16,32 +16,33 @@ const getTransformationMeta = (key) => {
   };
 };
 
-const transformationModules = Object.values(import.meta.glob('/assets/transformation/*.{png,jpg,jpeg}', { eager: true, import: 'default' }))
-  .map((url) => {
-    const match = url.match(/\/assets\/transformation\/([^/]+)$/i);
-    return match ? match[1] : '';
+const transformationModules = Object.entries(import.meta.glob('../../../assets/transformation/*.{png,jpg,jpeg}', { eager: true, import: 'default' }))
+  .map(([path, src]) => {
+    const match = path.match(/\/assets\/transformation\/([^/]+)$/i);
+    return match ? { fileName: match[1], src } : null;
   })
   .filter(Boolean)
-  .sort();
+  .sort((a, b) => a.fileName.localeCompare(b.fileName));
 
-const items = transformationModules.reduce((pairs, fileName) => {
+const items = transformationModules.reduce((pairs, item) => {
+  const fileName = item.fileName;
   const lowerName = fileName.toLowerCase();
 
   if (lowerName.includes('_before')) {
     const key = fileName.replace(/_before.*$/i, '');
     const existing = pairs.find((entry) => entry.key === key);
     if (existing) {
-      existing.before = `/assets/transformation/${fileName}`;
+      existing.before = item.src;
     } else {
-      pairs.push({ key, before: `/assets/transformation/${fileName}`, after: '' });
+      pairs.push({ key, before: item.src, after: '' });
     }
   } else if (lowerName.includes('_after')) {
     const key = fileName.replace(/_after.*$/i, '');
     const existing = pairs.find((entry) => entry.key === key);
     if (existing) {
-      existing.after = `/assets/transformation/${fileName}`;
+      existing.after = item.src;
     } else {
-      pairs.push({ key, before: '', after: `/assets/transformation/${fileName}` });
+      pairs.push({ key, before: '', after: item.src });
     }
   }
 
@@ -103,9 +104,9 @@ const TransformationCard = ({ item }) => {
           onPointerCancel={handleDragEnd}
         >
           <div className="comparison-frame">
-            <img className="comparison-image before-image" src={`/ironbeastfitnessstudio${item.before}`} alt={`${item.name} before`} />
+            <img className="comparison-image before-image" src={item.before} alt={`${item.name} before`} />
             <div className="comparison-image after-layer" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}>
-              <img className="comparison-image" src={`/ironbeastfitnessstudio${item.after}`} alt={`${item.name} after`} />
+              <img className="comparison-image" src={item.after} alt={`${item.name} after`} />
             </div>
             <div className="comparison-divider" style={{ left: `${split}%` }}>
               <span className="comparison-handle" />

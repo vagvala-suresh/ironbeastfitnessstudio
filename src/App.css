@@ -74,9 +74,15 @@ body {
   color: var(--text-main);
   font-family: var(--font-body);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+}
+
+img, svg, video {
+  max-width: 100%;
+  display: block;
+  height: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -104,6 +110,7 @@ button {
 
 /* Container */
 .container {
+  width: min(100%, 1280px);
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
@@ -147,9 +154,87 @@ button {
 }
 
 /* Mobile responsive global overrides */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  html, body, #root {
+    overflow-x: hidden;
+  }
+
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .container,
+  .features-content,
+  .features-copy,
+  .features-header,
+  .features-grid,
+  .about-copy-grid,
+  .about-card,
+  .feature-card,
+  .stat-card,
+  .gallery-slide,
+  .gallery-card,
+  .transform-slide,
+  .transform-card,
+  .comparison-frame,
+  .modal-content,
+  .nav-menu,
+  .nav-links,
+  .nav-link,
+  .hero-feature-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .features-grid,
+  .about-copy-grid,
+  .about-stats-row,
+  .trainers-grid,
+  .contact-container,
+  .pricing-grid,
+  .classes-grid,
+  .faq-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-buttons,
+  .header-actions,
+  .hero-features-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .hero-features-row {
+    overflow-x: hidden;
+    white-space: normal;
+    gap: 10px;
+  }
+
+  .hero-feature-item {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 430px) {
   :root {
     --section-padding: 60px 5%;
+  }
+
+  .container {
+    padding: 0 14px;
   }
 
   .section-title {
@@ -212,11 +297,23 @@ button {
   border: 1px solid var(--border-active);
   border-radius: 24px;
   padding: 40px;
-  width: 100%;
+  width: min(92vw, 480px);
   max-width: 480px;
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
   animation: modalIn 0.3s ease-out;
+}
+
+@media (max-width: 430px) {
+  .modal-content {
+    padding: 26px 18px;
+    border-radius: 18px;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+  }
 }
 
 @keyframes modalIn {

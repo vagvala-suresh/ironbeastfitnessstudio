@@ -33,19 +33,6 @@ const Hero = ({ onOpenJoinModal }) => {
                 VIEW MEMBERSHIPS
               </a>
             </div>
-
-            <div className="hero-features-row">
-              <div className="hero-feature-item">
-                <span>Premium Equipment</span>
-              </div>
-              <div className="hero-feature-item">
-                <span>Certified Trainers</span>
-              </div>
-              <div className="hero-feature-item">
-                <span>Clean & Spacious</span>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>

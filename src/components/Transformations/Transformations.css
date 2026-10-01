@@ -116,7 +116,7 @@
 .comparison-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 2;
+  height: 440px;
   border-radius: 22px;
   overflow: hidden;
   background: #111;
@@ -220,6 +220,10 @@
   .comparison-label {
     font-size: 0.62rem;
     padding: 5px 8px;
+  }
+
+  .comparison-frame {
+    height: 380px;
   }
 
   .comparison-handle {

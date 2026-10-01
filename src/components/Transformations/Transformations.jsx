@@ -105,7 +105,7 @@ const TransformationCard = ({ item }) => {
         >
           <div className="comparison-frame">
             <img className="comparison-image before-image" src={item.before} alt={`${item.name} before`} />
-            <div className="comparison-image after-layer" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}>
+            <div className="comparison-image after-layer" style={{ clipPath: `inset(0 0 0 ${split}%)` }}>
               <img className="comparison-image" src={item.after} alt={`${item.name} after`} />
             </div>
             <div className="comparison-divider" style={{ left: `${split}%` }}>

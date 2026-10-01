@@ -1,0 +1,84 @@
+.mobile-card-slider-track,
+.mobile-card-slider-slide {
+  display: contents;
+}
+
+.mobile-card-slider-controls {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-card-slider.mobile-card-slider {
+    position: relative;
+    display: block;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .mobile-card-slider .mobile-card-slider-track {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  .mobile-card-slider .mobile-card-slider-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-card-slider .mobile-card-slider-slide {
+    display: block;
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+    padding: 0 38px;
+    box-sizing: border-box;
+    scroll-snap-align: center;
+  }
+
+  .mobile-card-slider .mobile-card-slider-slide > * {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mobile-card-slider .mobile-card-slider-controls {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: block;
+    pointer-events: none;
+  }
+
+  .mobile-card-slider .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    z-index: 5;
+    pointer-events: auto;
+  }
+
+  .mobile-card-slider .carousel-control.prev {
+    left: 0;
+  }
+
+  .mobile-card-slider .carousel-control.next {
+    right: 0;
+  }
+}

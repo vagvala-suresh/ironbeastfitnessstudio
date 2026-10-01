@@ -1,4 +1,5 @@
 import React from 'react';
+import MobileCardSlider from '../MobileCardSlider/MobileCardSlider.jsx';
 import './FAQ.css';
 
 const faqData = [
@@ -46,14 +47,14 @@ const FAQ = () => {
           </p>
         </div>
 
-        <div className="faq-grid">
+        <MobileCardSlider className="faq-grid" label="Frequently asked questions">
           {faqData.map((item, index) => (
-            <div key={index} className="faq-card">
+            <div key={item.question} className="faq-card">
               <h3>{item.question}</h3>
               <p>{item.answer}</p>
             </div>
           ))}
-        </div>
+        </MobileCardSlider>
       </div>
     </section>
   );

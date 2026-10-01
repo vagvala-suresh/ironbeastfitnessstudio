@@ -13,6 +13,10 @@
   overflow: hidden;
 }
 
+.facilities-mobile-carousel {
+  display: none;
+}
+
 .carousel-track-wrapper {
   overflow: hidden;
 }
@@ -126,5 +130,15 @@
   .carousel-control {
     width: 36px;
     height: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .facilities-carousel {
+    display: none;
+  }
+
+  .facilities-mobile-carousel {
+    display: block;
   }
 }

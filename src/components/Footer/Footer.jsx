@@ -8,7 +8,6 @@ const Footer = () => {
         <div className="footer-grid">
           <div>
             <a href="#top" className="brand-logo">
-              <div className="logo-badge">IF</div>
               <div className="logo-text">
                 <span className="logo-title">Sandy's</span>
                 <span className="logo-subtitle">Iron Beast Fitness Studio</span>

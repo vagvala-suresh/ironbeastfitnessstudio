@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Transformations.css';
 
 const normalizeKey = (key) => key.toLowerCase().replace(/(\d+)$/, '');
@@ -24,25 +24,25 @@ const transformationModules = Object.entries(import.meta.glob('../../../assets/t
   .filter(Boolean)
   .sort((a, b) => a.fileName.localeCompare(b.fileName));
 
-const items = transformationModules.reduce((pairs, item) => {
-  const fileName = item.fileName;
-  const lowerName = fileName.toLowerCase();
+const items = transformationModules.reduce((pairs, fileName) => {
+  const { fileName: name, src } = fileName;
+  const lowerName = name.toLowerCase();
 
   if (lowerName.includes('_before')) {
-    const key = fileName.replace(/_before.*$/i, '');
+    const key = name.replace(/_before.*$/i, '');
     const existing = pairs.find((entry) => entry.key === key);
     if (existing) {
-      existing.before = item.src;
+      existing.before = src;
     } else {
-      pairs.push({ key, before: item.src, after: '' });
+      pairs.push({ key, before: src, after: '' });
     }
   } else if (lowerName.includes('_after')) {
-    const key = fileName.replace(/_after.*$/i, '');
+    const key = name.replace(/_after.*$/i, '');
     const existing = pairs.find((entry) => entry.key === key);
     if (existing) {
-      existing.after = item.src;
+      existing.after = src;
     } else {
-      pairs.push({ key, before: '', after: item.src });
+      pairs.push({ key, before: '', after: src });
     }
   }
 
@@ -126,10 +126,41 @@ const TransformationCard = ({ item }) => {
 };
 
 const Transformations = () => {
-  const [paused, setPaused] = useState(false);
   const slideItems = transformedItems;
-  const marqueeItems = [...slideItems, ...slideItems];
-  const duration = Math.max(14, slideItems.length * 1.8);
+  const carouselRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused || slideItems.length < 2) return undefined;
+
+    const intervalId = window.setInterval(() => {
+      const carousel = carouselRef.current;
+      if (!carousel) return;
+
+      const slides = [...carousel.querySelectorAll('.transform-slide')];
+      const firstSlideLeft = slides[0]?.offsetLeft ?? 0;
+      const nextSlide = slides.find((slide) => slide.offsetLeft - firstSlideLeft > carousel.scrollLeft + 1);
+      carousel.scrollTo({ left: nextSlide ? nextSlide.offsetLeft - firstSlideLeft : 0, behavior: 'smooth' });
+    }, 1800);
+
+    return () => window.clearInterval(intervalId);
+  }, [paused, slideItems.length]);
+
+  const moveSlide = (direction) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const slides = [...carousel.querySelectorAll('.transform-slide')];
+    if (!slides.length) return;
+    const firstSlideLeft = slides[0].offsetLeft;
+    const currentIndex = slides.reduce((nearest, slide, index) => (
+      Math.abs(slide.offsetLeft - firstSlideLeft - carousel.scrollLeft) < Math.abs(slides[nearest].offsetLeft - firstSlideLeft - carousel.scrollLeft)
+        ? index
+        : nearest
+    ), 0);
+    const nextIndex = (currentIndex + direction + slides.length) % slides.length;
+    carousel.scrollTo({ left: slides[nextIndex].offsetLeft - firstSlideLeft, behavior: 'smooth' });
+  };
 
   return (
     <section id="transformations" className="transformations-section">
@@ -142,27 +173,27 @@ const Transformations = () => {
 
         <div
           className="transform-carousel"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
           onTouchStart={() => setPaused(true)}
           onTouchEnd={() => setPaused(false)}
         >
-          <div className="carousel-track-wrapper">
-            <div
-              className="carousel-track"
-              style={{
-                animation: `transform-marquee ${duration}s linear infinite`,
-                animationPlayState: paused ? 'paused' : 'running'
-              }}
-            >
-              {marqueeItems.map((item, index) => (
-                <div className="transform-slide" key={`${item.name}-${index}`}>
+          <div ref={carouselRef} className="carousel-track-wrapper" role="region" aria-label="Member transformations" tabIndex={0}>
+            <div className="carousel-track">
+              {slideItems.map((item) => (
+                <div className="transform-slide" key={item.name}>
                   <div className="transform-slide-row">
                     <TransformationCard item={item} />
                   </div>
                 </div>
               ))}
             </div>
+          </div>
+          <div className="carousel-controls">
+            <button type="button" className="carousel-control prev" aria-label="Previous transformation" onClick={() => moveSlide(-1)}>
+              ‹
+            </button>
+            <button type="button" className="carousel-control next" aria-label="Next transformation" onClick={() => moveSlide(1)}>
+              ›
+            </button>
           </div>
         </div>
       </div>

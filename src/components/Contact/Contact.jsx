@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MobileCardSlider from '../MobileCardSlider/MobileCardSlider.jsx';
 import './Contact.css';
 
 const Contact = () => {
@@ -27,31 +28,31 @@ const Contact = () => {
                 Stop by Sandy's Iron Beast Fitness Studio for a free walkthrough, or get in touch with our team to schedule your trial.
               </p>
 
-              <div className="contact-cards-grid train-cards-grid">
-                <div className="info-card">
+              <MobileCardSlider className="contact-cards-grid" label="Contact information">
+                <div className="info-card" key="studio-location">
                   <div className="info-icon">📍</div>
                   <h4 className="info-title">STUDIO LOCATION</h4>
                   <p className="info-detail">KSR Plaza, Road Number 5<br />KRCR Colony, Near More Super Market,<br />Bachupally – 500090</p>
                 </div>
 
-                <div className="info-card">
+                <div className="info-card" key="phone-whatsapp">
                   <div className="info-icon">📞</div>
                   <h4 className="info-title">PHONE & WHATSAPP</h4>
                   <p className="info-detail">+91 89194 57428 (Prop: Sandy)<br />+91 89194 57428 (WhatsApp)</p>
                 </div>
 
-                <div className="info-card">
+                <div className="info-card" key="working-hours">
                   <div className="info-icon">⏰</div>
                   <h4 className="info-title">WORKING HOURS</h4>
                   <p className="info-detail">Mon - Sat: 5:30 AM - 11:00 AM<br />Evening: 5:30 PM - 9:30 PM<br />Sunday: 6:00 AM - 10:00 AM (Closed in evening)</p>
                 </div>
 
-                <div className="info-card">
+                <div className="info-card" key="social">
                   <div className="info-icon">✉️</div>
                   <h4 className="info-title">SOCIAL</h4>
                   <p className="info-detail">Instagram: @sandysironbeastfitness<br />WhatsApp: +91 89194 57428</p>
                 </div>
-              </div>
+              </MobileCardSlider>
             </div>
           </div>
         </div>

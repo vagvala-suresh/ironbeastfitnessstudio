@@ -147,7 +147,11 @@
 
 @media (max-width: 992px) {
   .contact-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-info-box {
+    min-width: 0;
   }
 }
 
@@ -169,4 +173,3 @@
     font-size: 1.2rem;
   }
 }
-

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import MobileCardSlider from '../MobileCardSlider/MobileCardSlider.jsx';
 import './Facilities.css';
 
 const amenities = [
@@ -93,6 +94,16 @@ const Facilities = () => {
               />
             ))}
           </div>
+        </div>
+        <div className="facilities-mobile-carousel">
+          <MobileCardSlider className="facilities-mobile-grid" label="Studio amenities">
+            {amenities.map((item) => (
+              <div className="facility-card" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.detail}</p>
+              </div>
+            ))}
+          </MobileCardSlider>
         </div>
       </div>
     </section>

@@ -168,6 +168,10 @@
     grid-template-columns: 1fr;
   }
 
+  .features-copy {
+    min-width: 0;
+  }
+
   .features-header {
     text-align: center;
   }
@@ -212,4 +216,3 @@
     padding: 24px 18px;
   }
 }
-

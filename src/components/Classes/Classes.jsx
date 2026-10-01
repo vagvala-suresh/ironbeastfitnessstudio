@@ -1,4 +1,5 @@
 import React from 'react';
+import MobileCardSlider from '../MobileCardSlider/MobileCardSlider.jsx';
 import './Classes.css';
 
 const services = [
@@ -58,9 +59,9 @@ const Classes = ({ onOpenBookModal }) => {
           </p>
         </div>
 
-        <div className="classes-grid">
+        <MobileCardSlider className="classes-grid" label="Training programs">
           {services.map((service, index) => (
-            <div key={index} className="class-card">
+            <div key={service.title} className="class-card">
               <div className="class-body service-body">
                 <div className="service-icon">🔥</div>
                 <h3 className="class-title">{service.title}</h3>
@@ -68,7 +69,7 @@ const Classes = ({ onOpenBookModal }) => {
               </div>
             </div>
           ))}
-        </div>
+        </MobileCardSlider>
       </div>
     </section>
   );

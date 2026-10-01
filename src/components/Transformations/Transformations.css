@@ -3,6 +3,11 @@
   background: var(--bg-dark);
 }
 
+.transform-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
 .transform-carousel {
   position: relative;
   margin-top: 32px;

@@ -22,11 +22,13 @@ const Contact = () => {
         <div className="container">
           <div className="contact-container">
             <div className="contact-info-box">
-              <div className="section-title-badge">COME TRAIN WITH US</div>
-              <h2 className="section-title">START YOUR <span>BEAST MODE</span></h2>
-              <p className="section-subtitle" style={{ textAlign: 'left', margin: 0 }}>
-                Stop by Sandy's Iron Beast Fitness Studio for a free walkthrough, or get in touch with our team to schedule your trial.
-              </p>
+              <div className="contact-header">
+                <div className="section-title-badge">COME TRAIN WITH US</div>
+                <h2 className="section-title">START YOUR <span>BEAST MODE</span></h2>
+                <p className="section-subtitle contact-intro">
+                  Stop by Sandy's Iron Beast Fitness Studio for a free walkthrough, or get in touch with our team to schedule your trial.
+                </p>
+              </div>
 
               <MobileCardSlider className="contact-cards-grid" label="Contact information">
                 <div className="info-card" key="studio-location">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 import './Header.css';
 
 const Header = ({ onOpenJoinModal }) => {
@@ -11,6 +12,14 @@ const Header = ({ onOpenJoinModal }) => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setMobileOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
@@ -28,7 +37,24 @@ const Header = ({ onOpenJoinModal }) => {
           </div>
         </a>
 
-        <div className={`nav-menu ${mobileOpen ? 'open' : ''}`}>
+        <button
+          type="button"
+          className="mobile-toggle"
+          aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setMobileOpen((open) => !open)}
+        >
+          {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </button>
+
+        <div
+          className={`nav-menu-backdrop ${mobileOpen ? 'open' : ''}`}
+          aria-hidden="true"
+          onClick={() => setMobileOpen(false)}
+        />
+
+        <nav id="primary-navigation" className={`nav-menu ${mobileOpen ? 'open' : ''}`} aria-label="Main navigation">
           <ul className="nav-links">
             <li><a href="#top" className="nav-link" onClick={() => setMobileOpen(false)}>Home</a></li>
             <li><a href="#about" className="nav-link" onClick={() => setMobileOpen(false)}>About</a></li>
@@ -41,7 +67,7 @@ const Header = ({ onOpenJoinModal }) => {
             <li><a href="#faq" className="nav-link" onClick={() => setMobileOpen(false)}>FAQ</a></li>
             <li><a href="#contact" className="nav-link" onClick={() => setMobileOpen(false)}>Contact</a></li>
           </ul>
-        </div>
+        </nav>
       </div>
     </header>
   );
